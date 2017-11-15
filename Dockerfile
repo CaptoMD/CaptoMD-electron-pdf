@@ -3,9 +3,8 @@ FROM node:latest
 
 RUN apt-get update &&\
     apt-get install -y xvfb \
+         libotf-dev \
          x11-xkb-utils \
-         xfonts-100dpi \
-         xfonts-75dpi \
          xfonts-scalable \
          x11-apps \
          clang \
@@ -44,4 +43,5 @@ EXPOSE 9645
 
 ##CMD [ "npm", "start" ]
 CMD Xvfb -ac -screen scrn 1280x2000x24 :9.0 & export DISPLAY=:9.0 &&\
+    alias ll='ls -als' &&\
     npm start
