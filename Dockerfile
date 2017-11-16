@@ -1,5 +1,4 @@
 FROM node:latest
-# FROM kipparker/docker-tape-run
 
 RUN apt-get update &&\
     apt-get install -y xvfb \
@@ -23,11 +22,11 @@ RUN apt-get update &&\
          g++-multilib
 
 # Create app directory
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+RUN mkdir -p /usr/app
+WORKDIR /usr/app
 
 # Install app dependencies
-COPY package.json /usr/src/app/
+COPY package.json /usr/app/
 RUN yarn
 
 # Install electron
@@ -37,7 +36,7 @@ RUN yarn global add --platform=linux electron
 RUN mkdir -p /www
 
 # Bundle app source
-COPY . /usr/src/app
+COPY . /usr/app
 
 EXPOSE 9645
 
