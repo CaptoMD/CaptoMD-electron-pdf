@@ -56,8 +56,7 @@ typings/
 
 # dotenv environment variables file
 .env
-
-.idea
+.idea/**/workspace.xml
 *.iml
 .DS_Store
 instructions.md
