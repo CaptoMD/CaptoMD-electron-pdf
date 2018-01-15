@@ -1,6 +1,9 @@
 {
   "name": "CaptoMD-electron-pdf",
   "version": "1.0.0",
+  "engines": {
+    "node": ">=8"
+  },
   "description": "Simple Express server wrapper as service for fraserxu/electron-pdf",
   "author": "Alain Duchesneau <alain.duchesneau@gmail.com> (https://github.com/zzal)",
   "contributors": [
@@ -13,7 +16,6 @@
     "debug": "DEBUG=electronpdf:* /usr/local/bin/electron --execPath=/usr/app src/index.js",
     "start": "/usr/local/bin/electron --execPath=/usr/app src/index.js"
   },
-  "devDependencies": {},
   "dependencies": {
     "decompress": "^4.2.0",
     "decompress-unzip": "^4.0.1",
@@ -28,5 +30,10 @@
     "minimist": "^1.2.0",
     "object-assign": "^4.0.1",
     "uuid": "^3.1.0"
+  "devDependencies": {
+    "eslint": "^4.15.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1"
   }
 }
