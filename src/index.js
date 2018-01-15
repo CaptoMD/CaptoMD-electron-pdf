@@ -1,19 +1,53 @@
-/*
- * Copyright (c) 2017 CaptoMD
- */
-
+const app = require('./app');
+const http = require('http');
 const ElectronPDF = require('electron-pdf');
-const Server = require('./server');
-const config = require('./config');
 
-const PORT = process.env.ELECTRON_PDF_SERVICE_PORT || config.PORT || 9645;
-const exporter = new ElectronPDF();
+/**
+ * Get port from environment and store in Express.
+ */
+const port = process.env.PORT || 9645;
+app.set('port', port);
 
-//Only start the express server once the exporter is ready
-exporter.on('charged', () =>
-{
-    server.start(PORT);
+/**
+ * Event listener for HTTP server "error" event.
+ */
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  const bind = typeof port === 'string'
+    ? `Pipe ${port}`
+    : `Port ${port}`;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(`${bind} requires elevated privileges`);
+      process.exit(1);
+      // eslint-disable-next-line no-unreachable
+      break;
+    case 'EADDRINUSE':
+      console.error(`${bind} is already in use`);
+      process.exit(1);
+      // eslint-disable-next-line no-unreachable
+      break;
+    default:
+      throw error;
+  }
+}
+
+const electronPDF = new ElectronPDF();
+app.set('electronPDF', electronPDF);
+
+const server = http.createServer(app);
+server.on('error', onError);
+
+// wait for electronPDF
+electronPDF.on('charged', () => {
+  server.listen(port);
+  console.info(`Electron PDF started. Listening on port: ${port}`);
 });
 
-const server = new Server(exporter);
-exporter.start()
+console.info('starting Electron PDF.');
+electronPDF.start();
