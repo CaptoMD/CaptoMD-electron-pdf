@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:9
 
 RUN apt-get update &&\
     apt-get install -y xvfb \
@@ -21,22 +21,18 @@ RUN apt-get update &&\
          gcc-multilib \
          g++-multilib
 
-# Create app directory
-RUN mkdir -p /usr/app
-WORKDIR /usr/app
+ARG NODE_ENV=production
+ENV NODE_ENV=$NODE_ENV
+
+# Set a working directory
+WORKDIR /usr/src/app
 
 # Install app dependencies
-COPY package.json /usr/app/
+COPY package*.json ./
 RUN yarn
 
-# Install electron
-RUN yarn global add --platform=linux electron
-
-# Make output directory. Everything in here will be publicly accessible
-RUN mkdir -p /www
-
 # Bundle app source
-COPY . /usr/app
+COPY . .
 
 EXPOSE 9645
 
