@@ -1,3 +1,5 @@
+[![Known Vulnerabilities](https://snyk.io/test/github/CaptoMD/CaptoMD-electron-pdf/badge.svg?targetFile=package.json)](https://snyk.io/test/github/CaptoMD/CaptoMD-electron-pdf?targetFile=package.json)
+
 # CaptoMD-electron-pdf
 Express server wrapper as service for fraserxu/electron-pdf
 
