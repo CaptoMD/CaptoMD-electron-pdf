@@ -2,6 +2,7 @@
 * Copyright (c) 2017 CaptoMD
 */
 
+const Raven = require('raven');
 const fse = require('fs-extra');
 const path = require('path');
 const os = require('os');
@@ -14,6 +15,7 @@ const electronPdfJob = require('../pdf/electron-pdf-job');
 const unzip = require('../util/unzip');
 
 const router = express.Router();
+Raven.config(process.env.ELETRON_PDF_RAVEN_URL || '').install();
 
 router.use(bodyParser.raw({ type: 'application/zip', limit: '6mb' }));
 
@@ -30,6 +32,7 @@ router.post('/', (req, res, next) => {
       res.send(pdf);
     })
     .catch((error) => {
+      Raven.captureException(error);
       debug('PDF error', error);
       next(error);
     });
