@@ -1,4 +1,4 @@
-FROM node:9
+FROM node:10
 
 RUN apt-get update &&\
     apt-get install -y xvfb \
@@ -29,7 +29,7 @@ WORKDIR /usr/src/app
 
 # Install app dependencies
 COPY package*.json ./
-RUN yarn
+RUN npm install
 
 # Bundle app source
 COPY . .
