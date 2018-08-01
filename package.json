@@ -1,21 +1,17 @@
 {
-  "name": "CaptoMD-electron-pdf",
+  "name": "captomd-electron-pdf",
   "version": "1.0.0",
   "engines": {
     "node": ">=8"
   },
   "description": "Simple Express server wrapper as service for fraserxu/electron-pdf",
-  "author": "Alain Duchesneau <alain.duchesneau@gmail.com> (https://github.com/zzal)",
   "contributors": [
-    "Julien Marcil <julien@marcil.com> (https://github.com/Nr9)"
+    "Julien Marcil <julien@marcil.com> (https://github.com/Nr9)",
+    "Alain Duchesneau <alain.duchesneau@gmail.com> (https://github.com/zzal)"
   ],
   "private": true,
   "license": "UNLICENSED",
   "main": "src/index.js",
-  "scripts": {
-    "debug": "DEBUG=electronpdf:* /usr/local/bin/electro src/index.js",
-    "start": "electron src/index.js"
-  },
   "dependencies": {
     "async": "^2.6.1",
     "body-parser": "^1.18.3",
@@ -28,10 +24,26 @@
     "morgan": "^1.9.0",
     "raven": "^2.6.3"
   },
+  "pre-commit": [
+    "eslint"
+  ],
   "devDependencies": {
-    "eslint": "^5.0.1",
-    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint": "^5.2.0",
     "eslint-plugin-import": "^2.13.0",
-    "eslint-plugin-node": "^6.0.1"
+    "eslint-plugin-node": "^7.0.1",
+    "eslint-plugin-prettier": "^2.6.2",
+    "pre-commit": "^1.2.2",
+    "prettier": "1.14.0",
+    "snyk": "^1.90.0"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "printWidth": 120
+  },
+  "scripts": {
+    "eslint": "eslint --cache .",
+    "snyk-protect": "snyk protect",
+    "debug": "DEBUG=electronpdf:* /usr/local/bin/electro src/index.js",
+    "start": "electron src/index.js"
   }
 }
