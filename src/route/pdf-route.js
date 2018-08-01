@@ -22,16 +22,17 @@ router.use(bodyParser.raw({ type: 'application/zip', limit: '6mb' }));
 router.post('/', (req, res, next) => {
   const electronPDF = req.app.get('electronPDF');
 
-  fse.mkdtemp(path.join(os.tmpdir(), 'print-'))
+  fse
+    .mkdtemp(path.join(os.tmpdir(), 'print-'))
     .then(dir => unzip(req.body, dir))
     .then(dir => electronPdfJob(dir, electronPDF))
-    .then((pdf) => {
+    .then(pdf => {
       debug('pdf', pdf);
       res.setHeader('Content-disposition', `inline; filename="${req.query.filename || 'output.pdf'}"`);
       res.setHeader('Content-type', 'application/pdf');
       res.send(pdf);
     })
-    .catch((error) => {
+    .catch(error => {
       Raven.captureException(error);
       debug('PDF error', error);
       next(error);

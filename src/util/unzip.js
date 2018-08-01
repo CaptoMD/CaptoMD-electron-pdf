@@ -16,7 +16,8 @@ function unzip(data, destination) {
     if (zipFile.dir) {
       fs.mkdir(filePath, callback);
     } else {
-      zipFile.nodeStream()
+      zipFile
+        .nodeStream()
         .pipe(fs.createWriteStream(filePath))
         .on('finish', callback)
         .on('error', callback);
@@ -29,7 +30,7 @@ function unzip(data, destination) {
     queue.error = reject;
     queue.drain = () => resolve(destination);
 
-    JSZip.loadAsync(data).then((zip) => {
+    JSZip.loadAsync(data).then(zip => {
       zip.forEach((relativePath, zipFile) => {
         debug('queue unzip:', relativePath);
         queue.push({ relativePath, zipFile });
