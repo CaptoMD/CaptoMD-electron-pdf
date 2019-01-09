@@ -1,6 +1,6 @@
 /*
-* Copyright (c) 2017 CaptoMD
-*/
+ * Copyright (c) 2017 CaptoMD
+ */
 
 const Raven = require('raven');
 const fse = require('fs-extra');

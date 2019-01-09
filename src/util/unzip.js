@@ -1,6 +1,6 @@
 /*
-* Copyright (c) 2017 CaptoMD
-*/
+ * Copyright (c) 2017 CaptoMD
+ */
 
 const fs = require('fs');
 const path = require('path');
