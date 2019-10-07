@@ -22,7 +22,8 @@
     "fs-extra": "^8.1.0",
     "jszip": "^3.2.2",
     "morgan": "^1.9.1",
-    "raven": "^2.6.4"
+    "raven": "^2.6.4",
+    "snyk": "^1.232.0"
   },
   "resolutions": {
     "electron": "4.2.6"
@@ -36,8 +37,7 @@
     "eslint-plugin-node": "^9.1.0",
     "eslint-plugin-prettier": "^3.1.0",
     "pre-commit": "^1.2.2",
-    "prettier": "1.18.2",
-    "snyk": "^1.193.2"
+    "prettier": "1.18.2"
   },
   "prettier": {
     "singleQuote": true,
@@ -47,6 +47,8 @@
     "eslint": "eslint --cache .",
     "snyk-protect": "snyk protect",
     "debug": "DEBUG=electronpdf:* /usr/local/bin/electro src/index.js",
-    "start": "electron src/index.js"
-  }
+    "start": "electron src/index.js",
+    "prepublish": "npm run snyk-protect"
+  },
+  "snyk": true
 }
